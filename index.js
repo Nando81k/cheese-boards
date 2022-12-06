@@ -1,18 +1,19 @@
-// Initialize sequelize
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize({
-    dialect: 'sqlite',
-    storage: Path.join(__dirname, 'db.sqlite')
-})
-
-
 // Import models
-const CheeseBoard = require('./models/cheese-board')(sequelize);
-const Cheese = require('./models/cheese')(sequelize);
+const {Board} = require('./Board');
+const {Cheese} = require('./Cheese');
+const {User} = require('./User');
 
 // Define relationships
-CheeseBoard.hasMany(Cheese);
-Cheese.belongsTo(CheeseBoard);
+Board.hasMany(Cheese);
+Cheese.belongsTo(Board);
+User.hasMany(Board);
+Board.belongsTo(User);
+Cheese.hasMany(Board);
 
-// Sync database
-sequelize.sync({ force: true })
+
+// Export models
+module.exports = {
+    Board,
+    Cheese,
+    User
+}

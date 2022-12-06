@@ -1,9 +1,11 @@
+// Initialize Sequelize
+const { Sequelize, sequelize } = require('./db');
+
 // Define board model
-const Board = sequelize => {
-    return sequelize.define("board", {
-        title: { type: Sequelize.STRING },
-        description: { type: Sequelize.STRING}
+let Board = sequelize.define("Board", {
+        
+        name: Sequelize.STRING ,
+        description: Sequelize.STRING
     })
-}
 // Export board model
-module.exports = Board;
+module.exports = {Board};
